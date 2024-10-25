@@ -13,19 +13,20 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class ApplicationSecurity {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(authorize -> authorize
-                        // Autoriser toutes operation sur la route "/avis" (par defaut)
-                        .requestMatchers("/avis").permitAll()
-                        // Bloquer tte req non authentifiee (par defaut)
-                        .anyRequest().authenticated()
-                )
-                // Gestion de session
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // S'authentifier avec les config de basics de base
-                .httpBasic(Customizer.withDefaults())
-                // Construire le syst de securite
-                .build();
-    }
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		return httpSecurity.csrf(AbstractHttpConfigurer::disable)
+		                   .authorizeHttpRequests(authorize -> authorize
+				                   // Autoriser toutes les opérations sur la route "/avis"
+				                   .requestMatchers("/avis").permitAll()
+				                   // Bloquer toutes les requêtes non authentifiées
+				                   .anyRequest().authenticated())
+		                   // Gestion de session
+		                   .sessionManagement(httpSecuritySessionManagementConfigurer ->
+				                   httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+		                   // S'authentifier avec les configurations de base
+		                   .httpBasic(Customizer.withDefaults())
+		                   // Construire le système de sécurité
+		                   .build();
+	}
 }

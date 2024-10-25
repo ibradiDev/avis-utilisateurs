@@ -1,26 +1,29 @@
 package ibradi.dev.avis.au;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
-@RequestMapping(path = "avis")
+@RequestMapping("/avis")
 public class AvisController {
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Avis> search() {
-        return List.of(new Avis("Débuter avec Spring", "Ibradi", LocalDateTime.now()), new Avis("Formation sur Spring", "Ibradi.dev", LocalDateTime.now()));
-    }
+	AvisService avisService;
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Avis avis) {
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AvisDTO> search() {
+		return avisService.search();
+	}
 
-    }
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void create(@RequestBody AvisDTO avisDTO) {
+		avisService.create(avisDTO);
+	}
 
 }

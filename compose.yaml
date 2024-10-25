@@ -1,0 +1,25 @@
+services:
+  adminer:
+    image: "adminer:4.8.1-standalone"
+    container_name: db-ihm
+    ports:
+      - 9090:8080
+    networks:
+      - applications-network
+
+  postgres:
+    image: "postgres:16.0-bullseye"
+    container_name: db-avis
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=avis
+    networks:
+      - applications-network
+
+networks:
+  applications-network:
+    external: true
+    name: applications-network

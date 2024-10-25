@@ -1,5 +1,6 @@
 package ibradi.dev.avis.au;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -9,8 +10,17 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
+@Entity
+@Table(name = "avis")
 public class Avis {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String message;
-    private String nom;
     private LocalDateTime creation;
+
+
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_id")
+    private Utilisateur utilisateur;
 }
