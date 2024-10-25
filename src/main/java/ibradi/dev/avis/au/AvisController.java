@@ -9,7 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(path = "avis")
+@RequestMapping("/avis")
 public class AvisController {
 
 	AvisService avisService;
