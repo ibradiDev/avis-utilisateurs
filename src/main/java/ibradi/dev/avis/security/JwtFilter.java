@@ -1,5 +1,7 @@
 package ibradi.dev.avis.security;
 
+import ibradi.dev.avis.entity.Jwt;
+import ibradi.dev.avis.service.JwtService;
 import ibradi.dev.avis.service.UtilisateurService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,17 +31,22 @@ public class JwtFilter extends OncePerRequestFilter {
 			HttpServletResponse response,
 			FilterChain filterChain) throws ServletException, IOException {
 		String token = null;
+		Jwt tokenFromDB = null;
 		String username = null;
 		boolean isTokenExpired = true;
 
 		final String authorization = request.getHeader("Authorization");
 		if (authorization != null && authorization.startsWith("Bearer ")) {
 			token = request.getHeader("Authorization").substring(7);
+			tokenFromDB = jwtService.tokenByValue(token);
 			isTokenExpired = jwtService.isTokenExpired(token);
 			username = jwtService.extractUsername(token);
 		}
 
-		if (!isTokenExpired && username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+		if (!isTokenExpired
+				&& tokenFromDB.getUtilisateur().getEmail().equals(username)
+				&& SecurityContextHolder.getContext().getAuthentication() == null
+		) {
 			UserDetails userDetails = utilisateurService.loadUserByUsername(username);
 //			Créer mes données d'authentification
 			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =

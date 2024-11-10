@@ -1,9 +1,8 @@
-package ibradi.dev.avis.security;
+package ibradi.dev.avis.service;
 
 import ibradi.dev.avis.entity.Jwt;
 import ibradi.dev.avis.entity.Utilisateur;
 import ibradi.dev.avis.repository.JwtRepository;
-import ibradi.dev.avis.service.UtilisateurService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -24,6 +23,13 @@ public class JwtService {
 	final String ENCRYPTION_KEY = "518477b84a55a00bf38eaadb8f9872f5883f10202cc3b60cd36c641432d6f872049c2da909ee9a967f99cd9744d702d5a05d5e585f5a6ebac0bb84a013dbf03c";
 	private UtilisateurService utilisateurService;
 	private JwtRepository jwtRepository;
+
+
+	public Jwt tokenByValue(String token) {
+		return jwtRepository
+				.findByValue(token)
+				.orElseThrow(() -> new RuntimeException("Token inconnu"));
+	}
 
 	private Claims getAllClaims(String token) {
 		return Jwts.parserBuilder()
@@ -87,6 +93,5 @@ public class JwtService {
 		final byte[] decoder = Decoders.BASE64.decode(ENCRYPTION_KEY);
 		return Keys.hmacShaKeyFor(decoder);
 	}
-
 
 }

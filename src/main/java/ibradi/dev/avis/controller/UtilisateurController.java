@@ -2,7 +2,7 @@ package ibradi.dev.avis.controller;
 
 import ibradi.dev.avis.AuthentificationDTO;
 import ibradi.dev.avis.entity.Utilisateur;
-import ibradi.dev.avis.security.JwtService;
+import ibradi.dev.avis.service.JwtService;
 import ibradi.dev.avis.service.UtilisateurService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
