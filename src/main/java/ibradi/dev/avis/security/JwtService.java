@@ -1,6 +1,8 @@
 package ibradi.dev.avis.security;
 
+import ibradi.dev.avis.entity.Jwt;
 import ibradi.dev.avis.entity.Utilisateur;
+import ibradi.dev.avis.repository.JwtRepository;
 import ibradi.dev.avis.service.UtilisateurService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -18,8 +20,10 @@ import java.util.function.Function;
 @AllArgsConstructor
 @Service
 public class JwtService {
+	public static final String BEARER = "bearer";
 	final String ENCRYPTION_KEY = "518477b84a55a00bf38eaadb8f9872f5883f10202cc3b60cd36c641432d6f872049c2da909ee9a967f99cd9744d702d5a05d5e585f5a6ebac0bb84a013dbf03c";
 	private UtilisateurService utilisateurService;
+	private JwtRepository jwtRepository;
 
 	private Claims getAllClaims(String token) {
 		return Jwts.parserBuilder()
@@ -48,7 +52,16 @@ public class JwtService {
 	public Map<String, String> generate(String username) {
 		Utilisateur utilisateur = (Utilisateur) utilisateurService.loadUserByUsername(username);
 
-		return generateJwt(utilisateur);
+		final Map<String, String> jwtMap = generateJwt(utilisateur);
+
+		final Jwt jwt = Jwt.builder()
+		                   .value(jwtMap.get(BEARER))
+		                   .deactivated(false)
+		                   .expired(false)
+		                   .utilisateur(utilisateur)
+		                   .build();
+		jwtRepository.save(jwt);
+		return jwtMap;
 	}
 
 	private Map<String, String> generateJwt(Utilisateur utilisateur) {
@@ -67,7 +80,7 @@ public class JwtService {
 		                               .setClaims(claims)
 		                               .signWith(getKey(), SignatureAlgorithm.HS512)
 		                               .compact();
-		return Map.of("bearer", bearerToken);
+		return Map.of(BEARER, bearerToken);
 	}
 
 	private SecretKey getKey() {
