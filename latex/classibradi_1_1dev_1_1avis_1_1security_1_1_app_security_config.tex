@@ -1,0 +1,99 @@
+\doxysection{ibradi.\+dev.\+avis.\+security.\+App\+Security\+Config Class Reference}
+\hypertarget{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config}{}\label{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config}\index{ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a78564b1b183fbfc1a9845a820051e97e}{App\+Security\+Config}} (\mbox{\hyperlink{classibradi_1_1dev_1_1avis_1_1security_1_1_jwt_filter}{Jwt\+Filter}} jwt\+Filter, BCrypt\+Password\+Encoder password\+Crypter\+Config, BCrypt\+Password\+Encoder b\+Crypt\+Password\+Encoder, User\+Details\+Service user\+Details\+Service)
+\item 
+Security\+Filter\+Chain \mbox{\hyperlink{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a75eec41124e8a34e863857ae2e855aad}{security\+Filter\+Chain}} (Http\+Security http\+Security)  throws Exception 
+\item 
+Authentication\+Manager \mbox{\hyperlink{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a792ba395d1190aa93e827bc0cd19c6d8}{authentication\+Manager}} (Authentication\+Configuration authentication\+Configuration)  throws Exception 
+\item 
+Authentication\+Provider \mbox{\hyperlink{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_af3b0dde146ea107cd64095ef505917b4}{authentication\+Provider}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The type App security config. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a78564b1b183fbfc1a9845a820051e97e}\index{ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}!AppSecurityConfig@{AppSecurityConfig}}
+\index{AppSecurityConfig@{AppSecurityConfig}!ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}}
+\doxysubsubsection{\texorpdfstring{AppSecurityConfig()}{AppSecurityConfig()}}
+{\footnotesize\ttfamily \label{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a78564b1b183fbfc1a9845a820051e97e} 
+ibradi.\+dev.\+avis.\+security.\+App\+Security\+Config.\+App\+Security\+Config (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classibradi_1_1dev_1_1avis_1_1security_1_1_jwt_filter}{Jwt\+Filter}}}]{jwt\+Filter}{, }\item[{BCrypt\+Password\+Encoder}]{password\+Crypter\+Config}{, }\item[{BCrypt\+Password\+Encoder}]{b\+Crypt\+Password\+Encoder}{, }\item[{User\+Details\+Service}]{user\+Details\+Service}{}\end{DoxyParamCaption})}
+
+Instantiates a new App security config.
+
+
+\begin{DoxyParams}{Parameters}
+{\em jwt\+Filter} & the jwt filter \\
+\hline
+{\em password\+Crypter\+Config} & the password crypter config \\
+\hline
+{\em b\+Crypt\+Password\+Encoder} & the b crypt password encoder \\
+\hline
+{\em user\+Details\+Service} & the user details service \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a792ba395d1190aa93e827bc0cd19c6d8}\index{ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}!authenticationManager@{authenticationManager}}
+\index{authenticationManager@{authenticationManager}!ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}}
+\doxysubsubsection{\texorpdfstring{authenticationManager()}{authenticationManager()}}
+{\footnotesize\ttfamily \label{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a792ba395d1190aa93e827bc0cd19c6d8} 
+Authentication\+Manager ibradi.\+dev.\+avis.\+security.\+App\+Security\+Config.\+authentication\+Manager (\begin{DoxyParamCaption}\item[{Authentication\+Configuration}]{authentication\+Configuration}{}\end{DoxyParamCaption}) throws Exception}
+
+Authentication manager authentication manager.
+
+
+\begin{DoxyParams}{Parameters}
+{\em authentication\+Configuration} & the authentication configuration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the authentication manager 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & the exception \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_af3b0dde146ea107cd64095ef505917b4}\index{ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}!authenticationProvider@{authenticationProvider}}
+\index{authenticationProvider@{authenticationProvider}!ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}}
+\doxysubsubsection{\texorpdfstring{authenticationProvider()}{authenticationProvider()}}
+{\footnotesize\ttfamily \label{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_af3b0dde146ea107cd64095ef505917b4} 
+Authentication\+Provider ibradi.\+dev.\+avis.\+security.\+App\+Security\+Config.\+authentication\+Provider (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Authentication provider authentication provider.
+
+\begin{DoxyReturn}{Returns}
+the authentication provider 
+\end{DoxyReturn}
+\Hypertarget{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a75eec41124e8a34e863857ae2e855aad}\index{ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}!securityFilterChain@{securityFilterChain}}
+\index{securityFilterChain@{securityFilterChain}!ibradi.dev.avis.security.AppSecurityConfig@{ibradi.dev.avis.security.AppSecurityConfig}}
+\doxysubsubsection{\texorpdfstring{securityFilterChain()}{securityFilterChain()}}
+{\footnotesize\ttfamily \label{classibradi_1_1dev_1_1avis_1_1security_1_1_app_security_config_a75eec41124e8a34e863857ae2e855aad} 
+Security\+Filter\+Chain ibradi.\+dev.\+avis.\+security.\+App\+Security\+Config.\+security\+Filter\+Chain (\begin{DoxyParamCaption}\item[{Http\+Security}]{http\+Security}{}\end{DoxyParamCaption}) throws Exception}
+
+Security filter chain security filter chain.
+
+
+\begin{DoxyParams}{Parameters}
+{\em http\+Security} & the http security \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the security filter chain 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & the exception \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/macbookprom1/\+Documents/\+SPRING BOOT/avis-\/utilisateurs/src/main/java/ibradi/dev/avis/security/App\+Security\+Config.\+java\end{DoxyCompactItemize}

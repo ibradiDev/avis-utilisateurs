@@ -1,0 +1,31 @@
+\chapter{Getting Started}
+\hypertarget{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p}{}\label{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p}\index{Getting Started@{Getting Started}}
+\label{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p_autotoc_md0}%
+\Hypertarget{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p_autotoc_md0}%
+\hypertarget{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p_autotoc_md1}{}\doxysubsection{\texorpdfstring{Reference Documentation}{Reference Documentation}}\label{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p_autotoc_md1}
+For further reference, please consider the following sections\+:
+
+
+\begin{DoxyItemize}
+\item \href{https://maven.apache.org/guides/index.html}{\texttt{ Official Apache Maven documentation}}
+\item \href{https://docs.spring.io/spring-boot/3.3.5/maven-plugin}{\texttt{ Spring Boot Maven Plugin Reference Guide}}
+\item \href{https://docs.spring.io/spring-boot/3.3.5/maven-plugin/build-image.html}{\texttt{ Create an OCI image}}
+\item \href{https://docs.spring.io/spring-boot/3.3.5/reference/web/servlet.html}{\texttt{ Spring Web}}
+\item \href{https://docs.spring.io/spring-boot/3.3.5/reference/using/devtools.html}{\texttt{ Spring Boot Dev\+Tools}}
+\item \href{https://docs.spring.io/spring-boot/3.3.5/reference/data/sql.html\#data.sql.jpa-and-spring-data}{\texttt{ Spring Data JPA}}
+\item \href{https://docs.spring.io/spring-boot/3.3.5/reference/web/spring-security.html}{\texttt{ Spring Security}}
+\item \href{https://docs.spring.io/spring-boot/3.3.5/reference/io/email.html}{\texttt{ Java Mail Sender}}
+\end{DoxyItemize}\hypertarget{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p_autotoc_md2}{}\doxysubsection{\texorpdfstring{Guides}{Guides}}\label{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p_autotoc_md2}
+The following guides illustrate how to use some features concretely\+:
+
+
+\begin{DoxyItemize}
+\item \href{https://spring.io/guides/gs/rest-service/}{\texttt{ Building a RESTful Web Service}}
+\item \href{https://spring.io/guides/gs/serving-web-content/}{\texttt{ Serving Web Content with Spring MVC}}
+\item \href{https://spring.io/guides/tutorials/rest/}{\texttt{ Building REST services with Spring}}
+\item \href{https://spring.io/guides/gs/accessing-data-jpa/}{\texttt{ Accessing Data with JPA}}
+\item \href{https://spring.io/guides/gs/securing-web/}{\texttt{ Securing a Web Application}}
+\item \href{https://spring.io/guides/tutorials/spring-boot-oauth2/}{\texttt{ Spring Boot and OAuth2}}
+\item \href{https://spring.io/guides/gs/authenticating-ldap/}{\texttt{ Authenticating a User with LDAP}}
+\end{DoxyItemize}\hypertarget{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p_autotoc_md3}{}\doxysubsection{\texorpdfstring{Maven Parent overrides}{Maven Parent overrides}}\label{md__2_users_2macbookprom1_2_documents_2_s_p_r_i_n_g_01_b_o_o_t_2avis-utilisateurs_2_h_e_l_p_autotoc_md3}
+Due to Maven\textquotesingle{}s design, elements are inherited from the parent POM to the project POM. While most of the inheritance is fine, it also inherits unwanted elements like {\ttfamily \texorpdfstring{$<$}{<}license\texorpdfstring{$>$}{>}} and {\ttfamily \texorpdfstring{$<$}{<}developers\texorpdfstring{$>$}{>}} from the parent. To prevent this, the project POM contains empty overrides for these elements. If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides. 
