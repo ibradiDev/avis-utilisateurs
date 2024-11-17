@@ -7,7 +7,6 @@ import ibradi.dev.avis.entity.Validation;
 import ibradi.dev.avis.repository.UtilisateurRepository;
 import ibradi.dev.avis.repository.ValidationRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -73,5 +72,25 @@ public class UtilisateurService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("Cet utilisateur n'existe pas"));
 	}
 
+
+	public void resetPassword(Map<String, String> params) {
+		Utilisateur utilisateur = (Utilisateur) loadUserByUsername(params.get("email"));
+		validationService.enregister(utilisateur);
+	}
+
+	public void newPassword(Map<String, String> params) {
+		Utilisateur utilisateur = (Utilisateur) loadUserByUsername(params.get("email"));
+		final Validation validation = validationService
+				.lireEnFonctionDuCode(params.get("code"));
+
+		if (validation.getUtilisateur().getEmail().equals(utilisateur.getEmail())) {
+			String mdpCrypte = passwordEncoder.encode(params.get("password"));
+			utilisateur.setMdp(mdpCrypte);
+			utilisateurRepository.save(utilisateur);
+		} else {
+			throw new RuntimeException("Cet utilisateur n'est pas concerné par ce code");
+		}
+
+	}
 
 }

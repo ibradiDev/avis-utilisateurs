@@ -39,6 +39,23 @@ public class UtilisateurController {
 		utilisateurService.activation(activation);
 	}
 
+	@PostMapping(path = "reset-password")
+	public void resetPassword(@RequestBody Map<String, String> params) {
+		log.info("resetting password");
+		utilisateurService.resetPassword(params);
+	}
+	@PostMapping(path = "new-password")
+	public void newPassword(@RequestBody Map<String, String> params) {
+		log.info("new-password");
+		utilisateurService.newPassword(params);
+	}
+
+	@PostMapping(path = "deconnexion")
+	public void deconnexion() {
+		log.info("Deconnexion");
+		jwtService.deconnexion();
+	}
+
 	@PostMapping(path = "connexion")
 	public Map<String, String> connexion(@RequestBody AuthentificationDTO authentificationDTO) {
 		final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(

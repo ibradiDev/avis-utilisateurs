@@ -37,7 +37,10 @@ public class AppSecurityConfig {
 		return httpSecurity
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(authorize -> authorize
-						.requestMatchers(POST, "/inscription").permitAll().requestMatchers(POST, "/activation").permitAll().requestMatchers(POST, "/connexion").permitAll()
+						.requestMatchers(POST, "/inscription").permitAll()
+						.requestMatchers(POST, "/activation").permitAll()
+						.requestMatchers(POST, "/connexion").permitAll().requestMatchers(POST, "/reset-password").permitAll()
+						.requestMatchers(POST, "/new-password").permitAll()
 						.anyRequest().authenticated()
 				)
 				.sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer

@@ -8,14 +8,22 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+@Slf4j
+@Transactional
 @AllArgsConstructor
 @Service
 public class JwtService {
@@ -28,7 +36,7 @@ public class JwtService {
 	public Jwt tokenByValue(String token) {
 		return jwtRepository
 				.findByValue(token)
-				.orElseThrow(() -> new RuntimeException("Token inconnu"));
+				.orElseThrow(() -> new RuntimeException("Token invalide ou inconnu"));
 	}
 
 	private Claims getAllClaims(String token) {
@@ -56,8 +64,9 @@ public class JwtService {
 	}
 
 	public Map<String, String> generate(String username) {
-		Utilisateur utilisateur = (Utilisateur) utilisateurService.loadUserByUsername(username);
-
+		Utilisateur utilisateur =
+				(Utilisateur) utilisateurService.loadUserByUsername(username);
+		desableTokens(utilisateur);
 		final Map<String, String> jwtMap = generateJwt(utilisateur);
 
 		final Jwt jwt = Jwt.builder()
@@ -70,6 +79,16 @@ public class JwtService {
 		return jwtMap;
 	}
 
+	private void desableTokens(Utilisateur utilisateur) {
+		final List<Jwt> jwtList = jwtRepository
+				.findAllByUtilisateur(utilisateur.getEmail())
+				.peek(jwt -> {
+					jwt.setDeactivated(true);
+					jwt.setExpired(true);
+				}).toList();
+		jwtRepository.saveAll(jwtList);
+	}
+
 	private Map<String, String> generateJwt(Utilisateur utilisateur) {
 		final long currentTime = System.currentTimeMillis();
 		final long expirationTime = currentTime + (30 * 60 * 1000);
@@ -79,7 +98,6 @@ public class JwtService {
 				Claims.EXPIRATION, new Date(expirationTime),
 				Claims.SUBJECT, utilisateur.getEmail()
 		);
-
 		final String bearerToken = Jwts.builder()
 		                               .setIssuedAt(new Date(currentTime))
 		                               .setExpiration(new Date(expirationTime))
@@ -94,4 +112,26 @@ public class JwtService {
 		return Keys.hmacShaKeyFor(decoder);
 	}
 
+	public void deconnexion() {
+		Utilisateur utilisateur =
+				(Utilisateur) SecurityContextHolder
+						.getContext().getAuthentication()
+						.getPrincipal();
+
+		Jwt jwt = jwtRepository
+				.findUtilisateurValidToken(
+						utilisateur.getEmail(), false, false
+				).orElseThrow(() -> new RuntimeException("Token invalide"));
+
+		jwt.setDeactivated(true);
+		jwt.setExpired(true);
+		jwtRepository.save(jwt);
+	}
+
+		@Scheduled(cron = "@daily")
+//	@Scheduled(cron = "0 */1 * * * *")
+	public void removeUseLessJwt() {
+		log.info("Suppression des token à {}", Instant.now());
+		jwtRepository.deleteAllByExpiredAndDeactivated(true, true);
+	}
 }

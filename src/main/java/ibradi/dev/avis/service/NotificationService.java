@@ -24,7 +24,7 @@ public class NotificationService {
 				NB: Ce code expire dans 10 minutes.
 				""", validation.getUtilisateur().getNom(), validation.getCode());
 		message.setText(messageText);
-
+ 
 		javaMailSender.send(message);
 	}
 }
